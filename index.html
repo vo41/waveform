@@ -7,9 +7,29 @@
     <!-- Include WaveSurfer.js -->
     <script src="https://unpkg.com/wavesurfer.js"></script>
     <style>
+        body {
+            background-color: #000; /* Black background */
+            color: #fff; /* White text (for the button) */
+            font-family: Arial, sans-serif;
+        }
+
         #waveform {
             width: 100%;
             height: 128px;
+            background-color: #000; /* Black background for the waveform container */
+        }
+
+        #playPauseBtn {
+            background-color: #fff; /* White background for the button */
+            color: #000; /* Black text on the button */
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #playPauseBtn:hover {
+            background-color: #ccc; /* Light gray on hover */
         }
     </style>
 </head>
@@ -21,8 +41,9 @@
         // Create an instance of WaveSurfer
         var wavesurfer = WaveSurfer.create({
             container: '#waveform',
-            waveColor: '#D9DCFF',
-            progressColor: '#4353FF',
+            waveColor: '#FFFFFF',  // White waveform
+            progressColor: '#FF0000',  // Red progress color (change as needed)
+            backgroundColor: '#000000', // Black background (ensure this matches the container's background)
             height: 128,
             responsive: true
         });
@@ -37,7 +58,7 @@
             wavesurfer.playPause();
         });
 
-        // Example: Load your WAV file from a URL
+        // Example: Load your audio file from a URL
         loadAudio('1. Wandering.mp3');
 
         // Optionally, add event listeners for ready and error events
