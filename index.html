@@ -6,11 +6,13 @@
     <title>Waveform Visualizer</title>
     <!-- Include WaveSurfer.js -->
     <script src="https://unpkg.com/wavesurfer.js"></script>
+    <!-- Link to Google Fonts for Arimo -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Arimo:wght@700&display=swap">
     <style>
         body {
             background-color: #000; /* Black background */
             color: #fff; /* White text (for the button) */
-            font-family: Arial, sans-serif;
+            font-family: 'Arimo', sans-serif; /* Arimo Bold font */
         }
 
         #waveform {
@@ -20,22 +22,41 @@
         }
 
         #playPauseBtn {
-            background-color: #fff; /* White background for the button */
-            color: #000; /* Black text on the button */
-            border: none;
-            padding: 10px 20px;
+            background-color: #000; /* Black background for the button */
+            color: #fff; /* White text (for the button) */
+            border: 1px solid #fff; /* White border */
+            border-radius: 0; /* Square edges */
+            padding: 5px 10px; /* Adjust padding for button size */
             cursor: pointer;
             margin-top: 10px;
+            font-family: 'Arimo', sans-serif; /* Arimo Bold font */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em; /* Font size for the icon */
+            line-height: 1; /* Ensure icons are vertically centered */
+        }
+
+        /* Play button style */
+        #playPauseBtn:before {
+            content: '▶'; /* Play icon */
+            color: #fff; /* White icon color */
+        }
+
+        /* Pause button style */
+        .playing #playPauseBtn:before {
+            content: '❚❚'; /* Pause icon */
+            color: #fff; /* White icon color */
         }
 
         #playPauseBtn:hover {
-            background-color: #ccc; /* Light gray on hover */
+            background-color: #333; /* Darker shade on hover */
         }
     </style>
 </head>
 <body>
     <div id="waveform"></div>
-    <button id="playPauseBtn">Play/Pause</button>
+    <button id="playPauseBtn"></button>
 
     <script>
         // Create an instance of WaveSurfer
@@ -44,6 +65,7 @@
             waveColor: '#FFFFFF',  // White waveform
             progressColor: '#5cdcff',  // Custom progress line color
             backgroundColor: '#000000', // Black background
+            cursorColor: '#5cdcff',  // Custom cursor color to match progress line
             height: 128,
             responsive: true
         });
@@ -55,11 +77,17 @@
 
         // Play/Pause button functionality
         document.getElementById('playPauseBtn').addEventListener('click', function() {
-            wavesurfer.playPause();
+            if (wavesurfer.isPlaying()) {
+                wavesurfer.pause();
+                this.classList.remove('playing');
+            } else {
+                wavesurfer.play();
+                this.classList.add('playing');
+            }
         });
 
-        // Example: Load your audio file from a URL
-        loadAudio('1. Wandering.mp3');
+        // Load your audio file from the GitHub Pages URL
+        loadAudio('https://vo41.github.io/waveform/02.%20Worlds%20Away.mp3');
 
         // Optionally, add event listeners for ready and error events
         wavesurfer.on('ready', function() {
