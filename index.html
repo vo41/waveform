@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waveform Visualizer</title>
+    <!-- Include WaveSurfer.js -->
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+    <style>
+        #waveform {
+            width: 100%;
+            height: 128px;
+        }
+    </style>
+</head>
+<body>
+    <div id="waveform"></div>
+    <button id="playPauseBtn">Play/Pause</button>
+
+    <script>
+        // Create an instance of WaveSurfer
+        var wavesurfer = WaveSurfer.create({
+            container: '#waveform',
+            waveColor: '#D9DCFF',
+            progressColor: '#4353FF',
+            height: 128,
+            responsive: true
+        });
+
+        // Load audio from a URL
+        function loadAudio(url) {
+            wavesurfer.load(url);
+        }
+
+        // Play/Pause button functionality
+        document.getElementById('playPauseBtn').addEventListener('click', function() {
+            wavesurfer.playPause();
+        });
+
+        // Example: Load your WAV file from a URL
+        loadAudio('YOUR_WAV_FILE_URL');
+
+        // Optionally, add event listeners for ready and error events
+        wavesurfer.on('ready', function() {
+            console.log('Waveform ready to play');
+        });
+
+        wavesurfer.on('error', function(e) {
+            console.log('Error loading waveform:', e);
+        });
+    </script>
+</body>
+</html>
