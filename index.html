@@ -38,14 +38,14 @@
         }
 
         /* Play button style */
-        #playPauseBtn:before {
-            content: '▶'; /* Play icon */
+        #playPauseBtn.playing:before {
+            content: '❚❚'; /* Pause icon */
             color: #fff; /* White icon color */
         }
 
         /* Pause button style */
-        .playing #playPauseBtn:before {
-            content: '❚❚'; /* Pause icon */
+        #playPauseBtn:not(.playing):before {
+            content: '▶'; /* Play icon */
             color: #fff; /* White icon color */
         }
 
